@@ -20,7 +20,7 @@ public class RunMVC {
         buildTrack();
         controller = new Controller();
         //I2CProtocol protocol = new I2CProtocol(controller);
-        race = new Race(track, controller, 7, 4);//, protocol);
+        race = new Race(track, controller, 7, 3);//, protocol);
         car = new Car(location, race);
         car.updateOrientation(90);
         view = new GUI(controller);

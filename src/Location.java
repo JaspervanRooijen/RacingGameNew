@@ -8,18 +8,18 @@ public class Location {
     private Location initialLocation;
     private int trackHeight;
     private int trackWidth;
-    private int segmentHeight;
-    private int segmentWidth;
+    private double segmentHeight;
+    private double segmentWidth;
     private boolean changedSegmentAfterFinish = true;
 
     public Location(int trackHeight, int trackWidth, int segmentHeight, int segmentWidth) {
         this.trackHeight = trackHeight;
         this.trackWidth = trackWidth;
-        this.segmentHeight = segmentHeight;
-        this.segmentWidth = segmentWidth;
+        this.segmentHeight = (double)segmentHeight;
+        this.segmentWidth = (double)segmentWidth;
     }
 
-    public void updateLocation(int trackHeight, int trackWidth, int segmentHeight, int segmentWidth) {
+    public void updateLocation(int trackHeight, int trackWidth, double segmentHeight, double segmentWidth) {
         this.trackHeight = trackHeight;
         this.trackWidth = trackWidth;
         this.segmentHeight = segmentHeight;
@@ -30,7 +30,7 @@ public class Location {
         this.segmentWidth = segmentWidth;
     }
     public void saveAsInitialLocation() {
-        initialLocation = new Location(trackHeight, trackWidth, segmentHeight, segmentWidth);
+        initialLocation = new Location(trackHeight, trackWidth, (int)segmentHeight, (int)segmentWidth);
     }
     public void reset() {
         trackHeight = initialLocation.getTrackHeight();
@@ -52,10 +52,10 @@ public class Location {
     public int getTrackWidth() {
         return trackWidth;
     }
-    public int getSegmentHeight() {
+    public double getSegmentHeight() {
         return segmentHeight;
     }
-    public int getSegmentWidth() {
+    public double getSegmentWidth() {
         return segmentWidth;
     }
 }

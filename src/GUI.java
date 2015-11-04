@@ -28,6 +28,7 @@ public class GUI extends Canvas implements Observer {
     public Rectangle startB = new Rectangle(WIDTH/2 -100, 150, 200, 100);
     public Rectangle optionsB = new Rectangle(WIDTH/2 -100, 300, 200, 100);
     public Rectangle quitB = new Rectangle(WIDTH/2 -100, 450, 200, 100);
+    private int crashed = 0;
 
     public GUI(Controller controller) {
         this.controller = controller;
@@ -91,12 +92,20 @@ public class GUI extends Canvas implements Observer {
                 }
             }
             drawRotated(spriteCar, controller.getCar().getOrientation(), WIDTH/2, HEIGHT/2, graphics);
-            graphics.setColor(Color.cyan);
-            graphics.fillRect(WIDTH/2, HEIGHT/2, 10, 10);
+            //graphics.setColor(Color.cyan);
+            //graphics.fillRect(WIDTH/2, HEIGHT/2, 10, 10);
             graphics.setColor(Color.cyan);
             Font font = new Font("arial", Font.PLAIN, 20);
             graphics.setFont(font);
             graphics.drawString(String.format("%.2f", (double) time/1000), 20, 30);
+            if (crashed > 0) {
+                graphics.setColor(Color.red);
+                Font font2 = new Font("arial", Font.BOLD, 256);
+                graphics.setFont(font2);
+                graphics.drawString("CRASH", WIDTH/2-450, HEIGHT/2);
+                crashed--;
+            }
+
         } else if (state == GameState.MAINMENU) {
             MenuGUI(graphics);
         } else if (state == GameState.PAUSEMENU) {
@@ -136,7 +145,7 @@ public class GUI extends Canvas implements Observer {
     public void PauseGameGUI(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g.setColor(Color.GRAY);
-        g.fillRect(WIDTH/2 -250, 50, 500, HEIGHT - 100);
+        g.fillRect(WIDTH / 2 - 250, 50, 500, HEIGHT - 100);
         g.setColor(Color.black);
         Font fnt1 = new Font("arial", Font.BOLD, 40);
         g.setFont(fnt1);
@@ -153,7 +162,7 @@ public class GUI extends Canvas implements Observer {
         g.setColor(Color.yellow);
         Font fnt1 = new Font("arial", Font.BOLD, 80);
         g.setFont(fnt1);
-        g.drawString("VICTORY!", WIDTH/2 - 180, startB.y + 65);
+        g.drawString("VICTORY!", WIDTH / 2 - 180, startB.y + 65);
         Font fnt2 = new Font("arial", Font.PLAIN, 25);
         g.setFont(fnt2);
         g.drawString("Completed laps in " + finaltime + " seconds", WIDTH/2 - 175, startB.y + 100);
@@ -235,6 +244,8 @@ public class GUI extends Canvas implements Observer {
             if(controller.getCar().isCrashed()) {
                 System.out.println("crashed");
                 controller.getCar().updateSpeed(0 - controller.getCar().getSpeed());
+                crashed = 5;
+
             }
             if(controller.getCar().onFinish()) {
                 if(controller.getRace().decrementLabsToGo()==0) {

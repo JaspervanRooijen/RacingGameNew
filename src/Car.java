@@ -44,8 +44,8 @@ public class Car extends Observable {
     public void updateLocation() {
         int trackHeight = location.getTrackHeight();
         int trackWidth = location.getTrackWidth();
-        int segmentHeight = location.getSegmentHeight();
-        int segmentWidth = location.getSegmentWidth();
+        double segmentHeight = location.getSegmentHeight();
+        double segmentWidth = location.getSegmentWidth();
         //System.out.println("Original segmentHeight: " + segmentHeight);
         //System.out.println("Original segmentWidth: " + segmentWidth);
 
@@ -112,8 +112,8 @@ public class Car extends Observable {
     public boolean isCrashed() {
         int currentTrackHeight = location.getTrackHeight();
         int currentTrackWidth = location.getTrackWidth();
-        int currentSegHeight = location.getSegmentHeight();
-        int currentSegWidth = location.getSegmentWidth();
+        int currentSegHeight = (int)location.getSegmentHeight();
+        int currentSegWidth = (int)location.getSegmentWidth();
         //System.out.println("TrackHeight = "+currentTrackHeight);
         //System.out.println("TrackWidth = "+currentTrackWidth);
         //System.out.println("SegHeight = "+currentSegHeight);
@@ -129,8 +129,8 @@ public class Car extends Observable {
     public boolean onFinish() {
         int currentTrackHeight = location.getTrackHeight();
         int currentTrackWidth = location.getTrackWidth();
-        int currentSegHeight = location.getSegmentHeight();
-        int currentSegWidth = location.getSegmentWidth();
+        int currentSegHeight = (int)location.getSegmentHeight();
+        int currentSegWidth = (int)location.getSegmentWidth();
 
         int trackIndex = ((currentTrackWidth-1)+(((currentTrackHeight-1)*(race.getTrack().getWidth()))));
         //System.out.println("Trackindex = "+trackIndex);

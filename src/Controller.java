@@ -94,8 +94,8 @@ public class Controller extends Thread implements KeyListener, MouseListener {
 
     public int getCarSurrounding(int i, int j) {
         int trackWidth = race.getTrack().getWidth();
-        int currentSegHeight = car.getLocation().getSegmentHeight();
-        int currentSegWidth = car.getLocation().getSegmentWidth();
+        int currentSegHeight = (int)car.getLocation().getSegmentHeight();
+        int currentSegWidth = (int)car.getLocation().getSegmentWidth();
         int currentTrackWidth = car.getLocation().getTrackWidth();
         int currentTrackHeight = car.getLocation().getTrackHeight();
 
@@ -265,7 +265,7 @@ public class Controller extends Thread implements KeyListener, MouseListener {
         car.updateOrientation(90);
         race.setTracksToGo(1);
         race.setTimeBegin();
-        race.setTracksToGo(4);
+        race.setTracksToGo(3);
         car.getLocation().setChangedSegmentAfterFinish(true);
     }
 
