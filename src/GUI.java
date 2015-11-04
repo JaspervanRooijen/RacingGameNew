@@ -24,6 +24,7 @@ public class GUI extends Canvas implements Observer {
     private BufferedImage background;
     private GameState state;
     private long time;
+    private String finaltime;
     public Rectangle startB = new Rectangle(WIDTH/2 -100, 150, 200, 100);
     public Rectangle optionsB = new Rectangle(WIDTH/2 -100, 300, 200, 100);
     public Rectangle quitB = new Rectangle(WIDTH/2 -100, 450, 200, 100);
@@ -146,18 +147,20 @@ public class GUI extends Canvas implements Observer {
         g2d.draw(optionsB);
         g2d.draw(quitB);
     }
+
     public void victoryGUI(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g.setColor(Color.GRAY);
-        g.fillRect(WIDTH/2 -250, 50, 500, HEIGHT - 100);
-        g.setColor(Color.black);
-        Font fnt1 = new Font("arial", Font.BOLD, 40);
+        g.setColor(Color.yellow);
+        Font fnt1 = new Font("arial", Font.BOLD, 80);
         g.setFont(fnt1);
-        g.drawString("VICTORY", startB.x + 15, startB.y + 65);
-        //g.drawString("", optionsB.x + 11, optionsB.y + 65);
+        g.drawString("VICTORY!", WIDTH/2 - 180, startB.y + 65);
+        Font fnt2 = new Font("arial", Font.PLAIN, 25);
+        g.setFont(fnt2);
+        g.drawString("Completed laps in " + finaltime + " seconds", WIDTH/2 - 175, startB.y + 100);
+        Font fnt3 = new Font("arial", Font.BOLD, 40);
+        g.setFont(fnt3);
+        g.setColor(Color.white);
         g.drawString("MENU", quitB.x + 42, quitB.y + 65);
-        g2d.draw(startB);
-        //g2d.draw(optionsB);
         g2d.draw(quitB);
     }
 
@@ -210,6 +213,10 @@ public class GUI extends Canvas implements Observer {
         time = l;
     }
 
+    public void setFinaltime() {
+        finaltime = String.format("%.2f", (double) time/1000);
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         long lt = System.nanoTime();
@@ -223,7 +230,6 @@ public class GUI extends Canvas implements Observer {
             dt--;
         }
         this.setTime(System.currentTimeMillis() - controller.getRace().getTimeBegin());
-        renderGame();
         if (state == GameState.GAME) {
             controller.getCar().updateLocation();
             if(controller.getCar().isCrashed()) {
@@ -233,6 +239,7 @@ public class GUI extends Canvas implements Observer {
             if(controller.getCar().onFinish()) {
                 if(controller.getRace().decrementLabsToGo()==0) {
                     state = GameState.VICTORY;
+                    setFinaltime();
                     this.removeKeyController(controller);
                     this.addMouseListener(controller);
                 }

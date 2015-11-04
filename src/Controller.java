@@ -240,9 +240,6 @@ public class Controller extends Thread implements KeyListener, MouseListener {
         } else if ((x >= view.WIDTH / 2 - 100 && x <= view.WIDTH / 2 + 100) && (y >= 450 && y <= 550) && view.getState().equals(GameState.OPTIONS)) {
             view.setState(GameState.MAINMENU);
         } else if ((x >= view.WIDTH / 2 - 100 && x <= view.WIDTH / 2 + 100) && (y >= 450 && y <= 550) && view.getState().equals(GameState.VICTORY)) {
-            //view.removeMouseController(this);
-            //view.addKeyController(this);
-            // race.setTimePause(pauseTime);
             view.setState(GameState.MAINMENU);
         }
     }
@@ -267,6 +264,7 @@ public class Controller extends Thread implements KeyListener, MouseListener {
         //I2CProtocol protocol = new I2CProtocol(controller);
         car.updateOrientation(90);
         race.setTracksToGo(1);
+        race.setTimeBegin();
         car.getLocation().setChangedSegmentAfterFinish(true);
     }
 

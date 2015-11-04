@@ -25,8 +25,8 @@ public class Car extends Observable {
         if (speed < -3) {
             speed = -3;
         }
-        if (speed > 10) {
-            speed = 10;
+        if (speed > 5) {
+            speed = 5;
         }
         System.out.println("Speed = "+speed);
     }
