@@ -265,6 +265,7 @@ public class Controller extends Thread implements KeyListener, MouseListener {
         car.updateOrientation(90);
         race.setTracksToGo(1);
         race.setTimeBegin();
+        race.setTracksToGo(4);
         car.getLocation().setChangedSegmentAfterFinish(true);
     }
 
